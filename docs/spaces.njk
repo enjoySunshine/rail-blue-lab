@@ -1,0 +1,103 @@
+---
+title: Supported Color Spaces
+---
+
+<section class="cn-ignore">
+	<figure id="space-tree">
+		{% include "docs/images/spaces.svg" %}
+		<figcaption>Tree of all color spaces supported by Color.js and their dependencies.</figcaption>
+	</figure>
+
+	<p>Color spaces are <code>ColorSpace</code> objects.
+	Every function in Color.js that takes a color space reference can take it in one of two forms:</p>
+
+	<ul>
+		<li>A string id of a <em>registered color space</em></li>
+		<li>A <code>ColorSpace</code> object</li>
+	</ul>
+
+	<p>When you import a module that defines a color space in the Object-Oriented API, this uses <code>ColorSpace.create()</code> which does two things:</p>
+	<ol>
+		<li>It invokes the <code>ColorSpace</code> constructor to create a new <code>ColorSpace</code> object</li>
+		<li>It calls <code>ColorSpace.register()</code> to register the color space so it can be referenced with a string id.
+		This just adds the color space to the <code>ColorSpace.registry</code> object.</li>
+		</li>
+	</ol>
+
+	<p> If you are using the <a href="procedural.html">prodcedural API</a>, you need to register color spaces yourself, by calling <code>ColorSpace.register(colorSpaceReference)</code>.
+</section>
+
+<section>
+	{% for id, space in spaces %}
+		{% set spaceAccessor = id | replace("-", "_") %}
+		<article class="color-space">
+			<header>
+				<h2 id="{{ id }}">{{ space.name }}</h2>
+				{% set filePath = 'src/spaces/' + (space.aliasOf or id) + '.js' %}
+				<a href="https://github.com/LeaVerou/color.js/tree/master/{{ filePath }}" class="file" target="_blank"><code>{{ filePath }}</code></a>
+			</header>
+			{% if space.aliasOf %}
+				<p class="alias-of">Alias of <a href="#{{ space.aliasOf }}">{{ spaces[space.aliasOf].name }}</a></p>
+			{% endif %}
+			<div class="description">
+				{% renderTemplate "njk,md", space %}
+				{{ description }}
+				{% endrenderTemplate %}
+			</div>
+			<dl class="meta">
+				{% if space.base %}
+					<div>
+						<dt>Base</dt>
+						<dd><a href="#{{ space.base.id }}"><strong>{{ space.base.name }}</strong></a></dd>
+					</div>
+				{% endif %}
+				<div>
+					<dt>White point:</dt>
+					<dd><strong>{{ space.white or "D65" }}</strong></dd>
+				</div>
+
+				<div>
+					<dt>Coordinates:</dt>
+					<dd>
+						<table class="fancy">
+							<thead>
+								<tr>
+									<th>Id</th>
+									<th>Name</th>
+									<th>Ref. range</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for coordId, coord in space.coords %}
+									<tr>
+										{% if coordId === coord.name -%}
+										<th colspan="2">{{ coordId }}</th>
+										{% else %}
+										<th>{{ coordId }}</th>
+										<th>{{ coord.name }}</th>
+										{% endif %}
+										<td>{{ coord.min | number }} &ndash; {{ coord.max | number }}</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</dd>
+				</div>
+			</dl>
+
+			<pre><code>let color = new Color("{{ id }}", [
+				{%- for coordId, coord in space.coords -%}
+					{{ coord.max | randomNumber(coord.min) }}{% if not loop.last %}, {% endif %}
+				{%- endfor -%}
+			]);
+{% for coordId, coord in space.coords -%}
+color.{{ spaceAccessor }}.{{ coordId }} = {{ +((coord.min + coord.max) / 2).toPrecision(3) }};
+{% endfor -%}
+color.toString();</code></pre>
+			{% if space.url -%}
+				<a href="{{ space.url }}" target="_blank" class="read-more">Learn more about {{ space.name }}</a>
+			{% endif %}
+		</article>
+
+	{% endfor %}
+</section>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html data-route="{{ page.url }}">
+<head>
+<title>
+	{%- if title -%}
+	{{ title }} &bull; Color.js
+	{%- else -%}
+	Color.js: Let’s get serious about color
+	{%- endif -%}
+</title>
+<meta name="viewport" content="width=device-width" />
+<link rel="shortcut icon" href="{{ page | relative }}/logo.svg">
+<link rel="stylesheet" href="{{ page | relative }}/assets/css/style.css">
+
+{% block head %}{% endblock %}
+
+<script src="{{ page | relative }}/color.js" type="module"></script>
+
+{% if has_mavo %}
+<link rel="stylesheet" href="https://get.mavo.io/mavo.css">
+<script src="https://get.mavo.io/mavo.js" async></script>
+{% endif %}
+
+{{ includes | safe }}
+
+</head>
+<body class="{% if body_classes %} {{ body_classes }} {% else %} language-javascript {% endif %}">
+
+{{ content | safe }}
+
+<footer>
+	Created by <a href="http://lea.verou.me">Lea Verou</a> (co-editor of CSS Color 4 and 5)
+	and <a href="https://svgees.us">Chris Lilley</a> (co-editor of CSS Color 3, 4, and 5; W3C representative to ICC).
+
+	Co-maintained by <a href="https://github.com/facelessuser">Isaac Muse</a>,
+	<a href="https://github.com/jgerigmeyer">Jonny Gerig Meyer</a>,
+	and
+	<a href="https://github.com/MysteryBlokHed">Adam Thompson-Sharpe</a>,
+	with lots of help from a <a href="">community of contributors</a>.
+
+	<nav>
+		{% include "partials/_nav-links.njk" %}
+	</nav>
+</footer>
+
+<script src="{{ page | relative }}/assets/js/index.js" type="module"></script>
+
+</body>
+</html>

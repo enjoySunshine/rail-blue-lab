@@ -1,0 +1,12 @@
+---
+layout: "page.njk"
+---
+
+<aside id="toc">
+<ul>
+{% include "partials/_docs-nav.njk" %}
+</ul>
+</aside>
+{{ content | safe }}
+
+{% include "partials/_footer-docs.njk" %}

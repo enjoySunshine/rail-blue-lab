@@ -1,0 +1,25 @@
+---
+layout: "plain.njk"
+title: Color Notebook
+has_mavo: true
+---
+
+<header>
+	{% include "../_includes/partials/_nav.njk" %}
+	<h1>Color Notebook</h1>
+</header>
+
+<main mv-app="colorNotebook" mv-plugins="markdown gist" mv-format="markdown" mv-storage="https://gist.github.com">
+
+<div property="content" mv-markdown-options="" mv-default='
+## Title
+
+```js
+let color = new Color("red");
+```'>
+
+</div>
+
+</main>
+
+<script src="repl.js" type="module"></script>

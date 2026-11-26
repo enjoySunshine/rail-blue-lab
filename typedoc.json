@@ -1,0 +1,45 @@
+{
+	"out": "./api",
+	"json": "./api/docs.json",
+	"name": "Color.js API Docs",
+	"tsconfig": "./tsconfig.typedoc.json",
+	"entryPoints": [
+		"src/types.d.ts",
+		"src/color.d.ts",
+		"src/space.d.ts",
+		"src/index-fn.js",
+		"src/spaces/index.js",
+		"src/deltaE/index.js"
+	],
+	"entryPointStrategy": "expand",
+	"plugin": [
+		"typedoc-plugin-rename-defaults"
+	],
+	"excludeExternals": true,
+	"includeVersion": true,
+	"kindSortOrder": [
+		"Project",
+		"Module",
+		"Enum",
+		"EnumMember",
+		"Class",
+		"Namespace",
+		"Interface",
+		"TypeAlias",
+		"Constructor",
+		"Property",
+		"Method",
+		"Function",
+		"Accessor",
+		"Variable",
+		"Reference",
+		"Parameter",
+		"TypeParameter",
+		"TypeLiteral",
+		"CallSignature",
+		"ConstructorSignature",
+		"IndexSignature",
+		"GetSignature",
+		"SetSignature"
+	]
+}

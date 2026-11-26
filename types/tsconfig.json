@@ -1,0 +1,19 @@
+{
+	"compilerOptions": {
+		"target":"ES2018",
+		"module": "commonjs",
+		"lib": ["ES2020"],
+		"noImplicitAny": true,
+		"noImplicitThis": true,
+		"strictFunctionTypes": true,
+		"strictNullChecks": true,
+		"types": [],
+		"noEmit": true,
+		"forceConsistentCasingInFileNames": true,
+		"paths": {
+			"colorjs.io": ["."],
+			"colorjs.io/fn": ["./src/index-fn.js"],
+			"colorjs.io/*": ["./*"]
+		}
+	}
+}

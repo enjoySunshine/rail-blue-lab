@@ -1,0 +1,17 @@
+{
+	"parse": "Parsing",
+	"construct": "Object construction",
+	"conversions": "Conversions",
+	"delta": "DeltaE",
+	"gamut": "Gamut mapping",
+	"in_gamut": "In gamut",
+	"interpolation": "Interpolation",
+	"modifications": "Color modification",
+	"contrast": "Contrast",
+	"angles": "Angles",
+	"adapt": "Chromatic adaptation",
+	"multiply_matrices": "Matrix multiplication",
+	"matrices": "Color space matrix exports",
+	"algebra": "Linear algebra",
+	"hooks": "Hooks"
+}
